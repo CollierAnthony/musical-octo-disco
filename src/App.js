@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
-import {Navigation} from './_components/Navigation';
-
 import {Login} from './_components/Login';
 import {LeaderBoard} from './_components/LeaderBoard';
 
@@ -22,7 +20,6 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <Navigation/>
                 <Container>
                     <Router>
                         <Switch>
