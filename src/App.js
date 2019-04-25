@@ -27,7 +27,7 @@ class App extends Component {
                             <Route exact path={'/leaderboard'} component={LeaderBoard}/>
                             <Route path={'/user/:id'} component={SingleUser}/>
                             <Route exact path={'/quiz/all'} component={AllQuiz}/>
-                            <Route exact path={'/quiz/:id'} component={SingleQuiz}/>
+                            <Route exact path={'/quiz/:category'} component={SingleQuiz}/>
                             <Route component={NotFound}/>
                         </Switch>
                     </Router>
