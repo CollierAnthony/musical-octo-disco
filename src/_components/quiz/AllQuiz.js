@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import { Row, Col} from 'reactstrap';
 
 class AllQuiz extends Component {
     constructor(props) {
@@ -11,9 +12,15 @@ class AllQuiz extends Component {
 
     render() {
         return (
-            <div>
-                AllQuiz
-            </div>
+            <Row>
+                <Col xs={{ size: 6}}>
+                    5480 pts
+                </Col>
+                <Col xs={{ size: 6}} className="text-right">
+                    carré?
+                </Col>
+            </Row>
+
         )
     }
 }
