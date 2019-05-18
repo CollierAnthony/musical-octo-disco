@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from "axios";
+import {Link} from "react-router-dom";
 
 import {Col, Row, Button} from "reactstrap";
 
@@ -12,6 +13,8 @@ class SingleQuiz extends Component {
             answered: false,
             activeQuestion: 0,
             score: 0,
+            timeLeft: 15,
+            endOfQuiz: false
         };
 
         this.submitAnswer = this.submitAnswer.bind(this);
@@ -24,10 +27,15 @@ class SingleQuiz extends Component {
             .then(res => {
                 const questionsList = res.data;
                 this.setState({questionsList});
-            })
+                this.startTimer();
+            });
     }
 
-    submitAnswer(answer, e) {
+    componentWillUnmount() {
+        clearInterval(this.timer);
+    }
+
+    submitAnswer(answer) {
         if (!this.state.answered) {
             this.setState({answered: true});
             console.log(answer);
@@ -41,6 +49,7 @@ class SingleQuiz extends Component {
     nextQuestion() {
         this.setState({answered: false});
         this.setState({activeQuestion: this.state.activeQuestion + 1});
+        this.setState({timeLeft: 15});
         console.log("next question");
         console.log(this.state.activeQuestion);
         console.log(this.state.score);
@@ -51,6 +60,20 @@ class SingleQuiz extends Component {
             if (question === "A") return "true";
             return "false";
         }
+    }
+
+    startTimer() {
+        this.timer = setInterval(() => {
+            if (!this.state.answered && this.state.activeQuestion < 10) {
+                if (this.state.timeLeft > 0) {
+                    this.setState({timeLeft: this.state.timeLeft - 1})
+                } else if (this.state.timeLeft === 0) {
+                    this.submitAnswer('timeOut');
+                }
+            } else {
+                return;
+            }
+        }, 1000);
     }
 
     render() {
@@ -66,9 +89,10 @@ class SingleQuiz extends Component {
                         <img src={question.image} alt={""}/>
                         <p>{question.title}</p>
                         <Row>
+                            {this.state.timeLeft}
                             {question.answers.map((answer, key) =>
                                 <Col key={key} xs={6}
-                                     onClick={(e) => this.submitAnswer(Object.keys(answer)[0], e)}
+                                     onClick={(e) => this.submitAnswer(Object.keys(answer)[0])}
                                      className={this.renderClass(Object.keys(answer)[0])}>{answer[Object.keys(answer)[0]]}</Col>
                             )}
                         </Row>
@@ -77,15 +101,16 @@ class SingleQuiz extends Component {
                         </span>
                     </div>
                 )
+            } else {
+                return (
+                    <div>
+                        <h1>C'est fini wesh</h1>
+                        <p>Téma ton score wesh : {this.state.score}</p>
+                        <Button>Soumets ton score wesh</Button>
+                        <Link to={'/'} className={'btn btn-primary'}>Retourne à l'accueil wesh</Link>
+                    </div>
+                )
             }
-            return (
-                <div>
-                    <h1>C'est fini wesh</h1>
-                    <p>Téma ton score wesh : {this.state.score}</p>
-                    <Button>Soumets ton score wesh</Button>
-                </div>
-            )
-
         } else {
             return <p>Chargement en cours</p>
         }
