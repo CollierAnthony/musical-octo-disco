@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
-
+import { Row, Col} from 'reactstrap';
+import {Link} from "react-router-dom";
 class SingleQuiz extends Component {
     constructor(props) {
         super(props);
@@ -260,14 +261,47 @@ class SingleQuiz extends Component {
 
     render() {
         let category = this.props.match.params.category;
+        let question = this.state.quiz[category].questions[0];
         return (
             <div>
-                <p>Les questions du quiz {category} :</p>
-                <ul>
-                    {this.state.quiz[category].questions.map((question, key) =>
-                        <li key={key}>{question.title}</li>
-                    )}
-                </ul>
+                <Row><Col className="question-infos"><span className="font-weight-bold font-italic">{category}</span> - <span>Question 1</span></Col></Row>
+                <Row><Col className="question-title">{question.title}</Col></Row>
+                <Row><Col className="question-img"></Col></Row>
+
+                <Row><Col xs={{size:2, offset: 5}} className="spacer"></Col></Row>
+
+                <Row className="answers">
+                    <div className="timer"></div>
+                    <Col xs={6} className={'text-center my-2 px-2'}>
+                        <Link className="answers-link" to={'/quiz/' + category}>
+                            <div className={'bg-light  rounded-lg px-2 py-4'}>
+                                {question.answers[1]}
+                            </div>
+                        </Link>
+                    </Col>
+                    <Col xs={6} className={'text-center my-2 px-2'}>
+                        <Link className="answers-link" to={'/quiz/' + category}>
+                            <div className={'bg-light  rounded-lg px-2 py-4'}>
+                                {question.answers[2]}
+                            </div>
+                        </Link>
+                    </Col>
+                    <Col xs={6} className={'text-center my-2 px-2'}>
+                        <Link className="answers-link" to={'/quiz/' + category}>
+                            <div className={'bg-light  rounded-lg px-2 py-4'}>
+                                {question.answers[3]}
+                            </div>
+                        </Link>
+                    </Col>
+                    <Col xs={6} className={'text-center my-2 px-2'}>
+                        <Link className="answers-link" to={'/quiz/' + category}>
+                            <div className={'bg-light  rounded-lg px-2 py-4'}>
+                                {question.answers[4]}
+                            </div>
+                        </Link>
+                    </Col>
+
+                </Row>
             </div>
         )
     }

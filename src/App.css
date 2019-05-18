@@ -1,0 +1,58 @@
+body{
+  background-image: url('assets/img/background.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+*{
+  font-family: "Open Sans";
+}
+.navbar {
+  height: 50px;
+  background: rgba(255,255,255,0.3);
+}
+.question-title{
+  color: white;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.question-infos{
+  color: white;
+  font-size: 1.2em;
+  margin: 20px 0;
+}
+.question-img{
+  height: 150px;
+}
+.answers{
+  position: relative;
+}
+.answers a{
+  color: #000;
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+.answers-link > div{
+box-shadow:  3px 4px 10px 0 rgba(50,50,50,0.4)
+}
+
+.timer{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 80px;
+  height: 80px;
+  margin: auto;
+  border-radius: 50%;
+  background-color: #656dFF;
+  z-index: 1;
+}
+
+.spacer{
+  height: 2px;
+  background: white;
+  margin: 20px 0;
+}

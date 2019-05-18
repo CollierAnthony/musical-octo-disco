@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom';
-
+import { Row, Col} from 'reactstrap';
 
 class AllQuiz extends Component {
     constructor(props) {
@@ -31,7 +31,7 @@ class AllQuiz extends Component {
                     carré?
                 </Col>
             </Row>
-            <Row className={'px-1'}>
+            <Row>
                 {this.state.categories.map((category, key) =>
                     <Col xs={6} key={key} className={'text-center my-2 px-2'}>
                         <Link to={'/quiz/' + category}>

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import { Row, Col} from 'reactstrap';
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 import {Login} from './_components/Login';
@@ -21,6 +21,7 @@ class App extends Component {
         return (
             <div className="App">
                 <Container>
+                    <Row className="navbar">Navbar</Row>
                     <Router>
                         <Switch>
                             <Route exact path={'/'} component={Login}/>
