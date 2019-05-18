@@ -3,12 +3,14 @@ import { Row, Col} from 'reactstrap';
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 import {Login} from './_components/Login';
+import {HomePage} from './_components/HomePage';
 import {LeaderBoard} from './_components/LeaderBoard';
 
 import {SingleUser} from './_components/user/SingleUser';
 
 import {AllQuiz} from './_components/quiz/AllQuiz';
 import {SingleQuiz} from './_components/quiz/SingleQuiz';
+import {NewQuiz} from './_components/quiz/NewQuiz';
 
 import {NotFound} from './_components/errors/NotFound';
 
@@ -24,10 +26,11 @@ class App extends Component {
                     <Row className="navbar">Navbar</Row>
                     <Router>
                         <Switch>
-                            <Route exact path={'/'} component={Login}/>
+                            <Route exact path={'/'} component={HomePage}/>
                             <Route exact path={'/leaderboard'} component={LeaderBoard}/>
                             <Route path={'/user/:id'} component={SingleUser}/>
                             <Route exact path={'/quiz/all'} component={AllQuiz}/>
+                            <Route exact path={'/quiz/new'} component={NewQuiz}/>
                             <Route exact path={'/quiz/:category'} component={SingleQuiz}/>
                             <Route component={NotFound}/>
                         </Switch>

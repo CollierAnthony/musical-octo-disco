@@ -56,3 +56,12 @@ box-shadow:  3px 4px 10px 0 rgba(50,50,50,0.4)
   background: white;
   margin: 20px 0;
 }
+
+.false{
+    background-color : red;
+}
+
+.true{
+    background-color: green;
+}
+
