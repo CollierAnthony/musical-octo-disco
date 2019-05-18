@@ -24,16 +24,36 @@ class AllQuiz extends Component {
         console.log(this.state.categories);
         return (
             <div>
-                <Row>
+                <h4>Selectionnez un thème :</h4>
+
+                <div className="section-quiz">
+                    <p>Quiz</p>
+                </div>
+                <Row className="selection-quiz">
                     {this.state.categories.map((category, key) =>
-                        <Col xs={6} key={key} className={'text-center my-2 px-2'}>
+                        <Col xs={6} key={key} className={'text-center'}>
                             <Link to={'/quiz/' + category.name}>
-                                <div className={'bg-light rounded-lg p-5'}>
+                                <div className={'bg-light rounded-lg'}>
                                     {category.name.toUpperCase()}
                                 </div>
                             </Link>
                         </Col>
                     )}
+
+                    <Col xs={6} className={'text-center empty'}>
+                        <Link to={'/quiz/all' }>
+                            <div className={'bg-light rounded-lg'}>
+
+                            </div>
+                        </Link>
+                    </Col>
+                    <Col xs={6} className={'text-center empty'}>
+                        <Link to={'/quiz/all' }>
+                            <div className={'bg-light rounded-lg'}>
+
+                            </div>
+                        </Link>
+                    </Col>
                 </Row>
             </div>
         )

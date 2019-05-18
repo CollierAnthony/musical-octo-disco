@@ -16,14 +16,12 @@ import {NotFound} from './_components/errors/NotFound';
 
 import {Container} from 'reactstrap';
 
-import './App.css';
 
 class App extends Component {
     render() {
         return (
             <div className="App">
                 <Container>
-                    <Row className="navbar">Navbar</Row>
                     <Router>
                         <Switch>
                             <Route exact path={'/'} component={HomePage}/>

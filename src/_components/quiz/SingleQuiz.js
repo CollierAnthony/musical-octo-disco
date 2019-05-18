@@ -82,17 +82,22 @@ class SingleQuiz extends Component {
             let question = questionsList.questions[this.state.activeQuestion];
             if (question) {
                 return (
-                    <div>
-                        <h1><span className={"title-category"}>{category}</span> -
-                            Question {this.state.activeQuestion + 1}</h1>
-                        <img src={question.image} alt={""}/>
-                        <p>{question.title}</p>
-                        <Row>
-                            {this.state.timeLeft}
+                    <div className="single-quiz">
+                        <p><span className={"title-category"}>{category}</span> -
+                            Question {this.state.activeQuestion + 1}</p>
+                        <h4>{question.title}</h4>
+                        <div className="quiz-img"><img src={question.image} alt={""}/></div>
+                        <div className="spacer"></div>
+                        <Row className="answers">
+                            <p className="timer">{this.state.timeLeft}</p>
+
                             {question.answers.map((answer, key) =>
                                 <Col key={key} xs={6}
                                      onClick={(e) => this.submitAnswer(Object.keys(answer)[0])}
-                                     className={this.renderClass(Object.keys(answer)[0])}>{answer[Object.keys(answer)[0]]}</Col>
+                                      >
+
+                                    <div className={"bg-light rounded-lg " + this.renderClass(Object.keys(answer)[0])} >{answer[Object.keys(answer)[0]]}</div>
+                                </Col>
                             )}
                         </Row>
                         <span className={"points"}>
@@ -102,11 +107,11 @@ class SingleQuiz extends Component {
                 )
             } else {
                 return (
-                    <div>
-                        <h1>C'est fini wesh</h1>
-                        <p>Téma ton score wesh : {this.state.score}</p>
-                        <Button>Soumets ton score wesh</Button>
-                        <Link to={'/'} className={'btn btn-primary'}>Retourne à l'accueil wesh</Link>
+                    <div className="d-flex flex-column align-items-center">
+                        <h4>Le quiz est terminé</h4>
+                        <p>Score final : {this.state.score}</p>
+                        <Button>Soumets ton score</Button>
+                        <Link to={'/'} className={'btn'}>Retourne à l'accueil</Link>
                     </div>
                 )
             }
