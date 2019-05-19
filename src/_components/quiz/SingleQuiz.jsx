@@ -22,7 +22,7 @@ class SingleQuiz extends Component {
     }
 
     componentDidMount() {
-        axios.get(`http://localhost:8081/categories/` + this.props.match.params.category)
+        axios.get(`http://localhost:8081/quiz/` + this.props.match.params.category)
             .then(res => {
                 const questionsList = res.data;
                 this.setState({questionsList});
