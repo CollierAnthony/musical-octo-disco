@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from "axios";
-import {Link} from "react-router-dom";
-import {Col, Row, Button} from "reactstrap";
+import {Link, Redirect} from "react-router-dom";
+import {Col, Row, Button, Form, Input} from "reactstrap";
 
 class SingleQuiz extends Component {
     constructor(props) {
@@ -13,25 +13,24 @@ class SingleQuiz extends Component {
             activeQuestion: 0,
             score: 0,
             timeLeft: 15,
-            endOfQuiz: false
+            endOfQuiz: false,
+            username: null,
+            redirect: false,
         };
 
         this.submitAnswer = this.submitAnswer.bind(this);
         this.nextQuestion = this.nextQuestion.bind(this);
         this.renderClass = this.renderClass.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     componentDidMount() {
-        axios.get(`http://localhost:8081/categories/` + this.props.match.params.category)
+        axios.get(`http://localhost:8081/quiz/` + this.props.match.params.category)
             .then(res => {
                 const questionsList = res.data;
                 this.setState({questionsList});
                 this.startTimer();
             });
-    }
-
-    componentWillUnmount() {
-        clearInterval(this.timer);
     }
 
     submitAnswer(answer) {
@@ -75,6 +74,28 @@ class SingleQuiz extends Component {
         }, 1000);
     }
 
+    handleChange(e) {
+        let username = e.target.value;
+        this.setState({username});
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+        if (this.state.username) {
+            let {username, score} = this.state;
+            axios.post('http://localhost:8081/leaderboard/', {username, score})
+                .then(() => {
+                    this.setState({redirect: true});
+                });
+        }
+    }
+
+    renderRedirect = () => {
+        if (this.state.redirect) {
+            return <Redirect to={'/leaderboard'}/>
+        }
+    };
+
     render() {
         let {questionsList} = this.state;
         let category = this.props.match.params.category;
@@ -87,16 +108,15 @@ class SingleQuiz extends Component {
                             Question {this.state.activeQuestion + 1}</p>
                         <h4>{question.title}</h4>
                         <div className="quiz-img"><img src={question.image} alt={""}/></div>
-                        <div className="spacer"></div>
+                        <div className="spacer"/>
                         <Row className="answers">
                             <p className="timer">{this.state.timeLeft}</p>
 
                             {question.answers.map((answer, key) =>
                                 <Col key={key} xs={6}
-                                     onClick={(e) => this.submitAnswer(Object.keys(answer)[0])}
-                                      >
-
-                                    <div className={"bg-light rounded-lg " + this.renderClass(Object.keys(answer)[0])} >{answer[Object.keys(answer)[0]]}</div>
+                                     onClick={() => this.submitAnswer(Object.keys(answer)[0])}>
+                                    <div
+                                        className={"bg-light rounded-lg " + this.renderClass(Object.keys(answer)[0])}>{answer[Object.keys(answer)[0]]}</div>
                                 </Col>
                             )}
                         </Row>
@@ -106,11 +126,16 @@ class SingleQuiz extends Component {
                     </div>
                 )
             } else {
+                clearInterval(this.timer);
                 return (
                     <div className="d-flex flex-column align-items-center">
+                        {this.renderRedirect()}
                         <h4>Le quiz est terminé</h4>
                         <p>Score final : {this.state.score}</p>
-                        <Button>Soumets ton score</Button>
+                        <Form onSubmit={(e) => this.handleSubmit(e)}>
+                            <Input placeholder={"Ton pseudo"} onChange={(e) => this.handleChange(e)} required/>
+                            <Button onClick={this.submitScore}>Soumets ton score</Button>
+                        </Form>
                         <Link to={'/'} className={'btn'}>Retourne à l'accueil</Link>
                     </div>
                 )

@@ -10,8 +10,9 @@ class HomePage extends Component {
                 <img src={logo} alt='logo' />
 
                 <div>
-                    <Link to={"/quiz/new"}>Nouveau quiz</Link>
                     <Link to={"/quiz/all"}>Jouer</Link>
+                    <Link to={"/leaderboard"}>Leaderboard</Link>
+                    <Link to={"/quiz/new"}>Nouveau quiz</Link>
                 </div>
             </div>
         )

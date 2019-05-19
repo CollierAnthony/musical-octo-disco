@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom';
-import { Row, Col} from 'reactstrap';
+import {Row, Col} from 'reactstrap';
 import axios from "axios";
 
 class AllQuiz extends Component {
@@ -13,7 +13,7 @@ class AllQuiz extends Component {
     }
 
     componentDidMount() {
-        axios.get(`http://localhost:8081/categories`)
+        axios.get(`http://localhost:8081/quiz`)
             .then(res => {
                 const categories = res.data;
                 this.setState({categories});
@@ -39,21 +39,6 @@ class AllQuiz extends Component {
                             </Link>
                         </Col>
                     )}
-
-                    <Col xs={6} className={'text-center empty'}>
-                        <Link to={'/quiz/all' }>
-                            <div className={'bg-light rounded-lg'}>
-
-                            </div>
-                        </Link>
-                    </Col>
-                    <Col xs={6} className={'text-center empty'}>
-                        <Link to={'/quiz/all' }>
-                            <div className={'bg-light rounded-lg'}>
-
-                            </div>
-                        </Link>
-                    </Col>
                 </Row>
             </div>
         )
