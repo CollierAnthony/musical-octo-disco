@@ -24,14 +24,14 @@ class LeaderBoard extends Component {
     render() {
         if (this.state.leaderboard) {
             return (
-                <div>
-                    Classement :
+                <div className={"leaderboard"}>
+                    <h1>Classement :</h1>
                     {this.state.leaderboard.map((player, key) =>
-                        <div key={key}><span
-                            className={"position-" + key}>#{key + 1}</span> {player.username} - {player.score > 1 ? player.score + " points" : player.score + " point"}
+                        <div key={key} className={"leaderboard_user"}><span
+                            className={"leaderboard_user-position position-" + (key+1)}>#{key + 1}</span> <b>{player.username}</b> - <i>{player.score > 1 ? player.score + " points" : player.score + " point"}</i>
                         </div>
                     )}
-                    <Link to={"/"}>Retour à l'accueil</Link>
+                    <Link to={"/"} className={"btn"}>Retour à l'accueil</Link>
                 </div>
             )
         } else {

@@ -7,12 +7,12 @@ class HomePage extends Component {
     render() {
         return (
             <div className="homepage">
-                <img src={logo} alt='logo' />
+                <img src={logo} alt='logo'/>
 
                 <div>
-                    <Link to={"/quiz/all"}>Jouer</Link>
-                    <Link to={"/leaderboard"}>Leaderboard</Link>
-                    <Link to={"/quiz/new"}>Nouveau quiz</Link>
+                    <Link to={"/quiz/all"} className={"btn"}>Jouer</Link>
+                    <Link to={"/leaderboard"} className={"btn"}>Leaderboard</Link>
+                    <Link to={"/quiz/new"} className={"btn"}>Nouveau quiz</Link>
                 </div>
             </div>
         )
