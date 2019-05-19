@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Row, Col} from 'reactstrap';
-import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 
 import {Login} from './_components/Login';
 import {HomePage} from './_components/HomePage';
@@ -18,10 +18,33 @@ import {Container} from 'reactstrap';
 
 
 class App extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            menu: "closed",
+        };
+    }
+
+    openMenu(){
+        if(this.state.menu === "open"){
+            this.setState({menu:"closed"});
+        }else{
+            this.setState({menu:"open"});
+        }
+    }
     render() {
         return (
             <div className="App">
                 <Container>
+                    <div className="navbar" >
+                        <div className="menulink" onClick={(e) => this.openMenu()}>
+                            Menu
+                        </div>
+                    </div>
+                    <div className={"menu "+this.state.menu} >
+                        <a href={"/quiz/new"}>Nouveau quiz</a>
+                    </div>
                     <Router>
                         <Switch>
                             <Route exact path={'/'} component={HomePage}/>
