@@ -53,7 +53,7 @@ class NewQuiz extends Component {
         currentQuestionVar.id = this.state.nbQuestions;
         this.setState({
             currentQuestion: currentQuestionVar
-        })
+        });
         console.log('currentQuestion', this.state.currentQuestion);
         console.log('state', this.state);
     }

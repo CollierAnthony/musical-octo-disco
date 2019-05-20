@@ -96,6 +96,13 @@ class SingleQuiz extends Component {
         }
     };
 
+    shuffle(a) {
+        for (let i = a.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [a[i], a[j]] = [a[j], a[i]];
+        }
+    }
+
     render() {
         let {questionsList} = this.state;
         let category = this.props.match.params.category;
@@ -134,7 +141,8 @@ class SingleQuiz extends Component {
                         <p>Score final : {this.state.score}</p>
                         <Form onSubmit={(e) => this.handleSubmit(e)}>
                             <Input placeholder={"Ton pseudo"} onChange={(e) => this.handleChange(e)} required/>
-                            <button onClick={this.submitScore} type={'submit'} className={'btn'}>Soumets ton score</button>
+                            <button onClick={this.submitScore} type={'submit'} className={'btn'}>Soumets ton score
+                            </button>
                         </Form>
                         <Link to={'/'} className={'btn'}>Retourne à l'accueil</Link>
                     </div>
