@@ -24,33 +24,38 @@ class NewQuiz extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.setState({questions: this.state.questions.push(this.state.currentQuestion)});
+        let questionsVar = this.state.questions;
+        let currentQuestionVar = this.state.currentQuestion;
+        questionsVar.push(currentQuestionVar);
+        this.setState({questions: questionsVar});
         this.setState({nbQuestion: this.state.nbQuestions + 1});
         e.target.reset();
         console.log(this.state);
     }
 
     handleChange(e) {
-        let {currentQuestion} = this.state;
+        let currentQuestionVar = this.state.currentQuestion;
         let target = e.target.name;
         let value = e.target.value;
         if (target === "quizName") {
             this.setState({quizName: e.target.value});
         } else if (target === "A") {
-            currentQuestion.answers[0] = {"A": value};
+            currentQuestionVar.answers[0] = {"A": value};
         } else if (target === "B") {
-            currentQuestion.answers[1] = {"B": value};
+            currentQuestionVar.answers[1] = {"B": value};
         } else if (target === "C") {
-            currentQuestion.answers[2] = {"C": value};
+            currentQuestionVar.answers[2] = {"C": value};
         } else if (target === "D") {
-            currentQuestion.answers[3] = {"D": value};
+            currentQuestionVar.answers[3] = {"D": value};
         } else {
-            currentQuestion[target] = value;
+            currentQuestionVar[target] = value;
         }
-        currentQuestion.id = this.state.nbQuestions;
+        currentQuestionVar.id = this.state.nbQuestions;
         this.setState({
-            currentQuestion
+            currentQuestion: currentQuestionVar
         })
+        console.log('currentQuestion', this.state.currentQuestion);
+        console.log('state', this.state);
     }
 
     render() {
