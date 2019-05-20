@@ -170,7 +170,7 @@ h4 {
     background: rgba(255, 255, 255, 0.2);
 }
 
-.single-quiz, .leaderboard {
+.single-quiz, .leaderboard, .new-quiz {
     padding-top: 100px;
     display: flex;
     flex-direction: column;

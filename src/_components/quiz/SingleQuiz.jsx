@@ -134,7 +134,7 @@ class SingleQuiz extends Component {
                         <p>Score final : {this.state.score}</p>
                         <Form onSubmit={(e) => this.handleSubmit(e)}>
                             <Input placeholder={"Ton pseudo"} onChange={(e) => this.handleChange(e)} required/>
-                            <Button onClick={this.submitScore}>Soumets ton score</Button>
+                            <button onClick={this.submitScore} type={'submit'} className={'btn'}>Soumets ton score</button>
                         </Form>
                         <Link to={'/'} className={'btn'}>Retourne à l'accueil</Link>
                     </div>
